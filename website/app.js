@@ -10,9 +10,7 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 const get_data =async function getData(url){
   const res =await fetch(url);
   try{
-      console.log(url);
        const data= res.json();
-       console.log("data from server"+data);
        return data;
   } catch(error){
       console.log("error",error);
@@ -29,10 +27,9 @@ const post_data =async function postData(url,data){
         body: JSON.stringify(data), // body data type must match "Content-Type" header        
       });
     try{
-        console.log(url);
-         //const data= res.json();
-         console.log(data);
-         //return data;
+
+        const data= res.json();
+        console.log(data);
     } catch(error){
         console.log("error",error);
     }
@@ -40,7 +37,6 @@ const post_data =async function postData(url,data){
 
 
 
-//let data=get_data("/all")
 
 const  button =document.getElementById("generate");
 button.addEventListener("click",update_weather_info);
@@ -66,10 +62,11 @@ function update_weather_info()
 }
 
 const updateUI =async function update_UI(){
+    /*getting Date, temp, content from DOM*/
     const temp=document.getElementById("temp");
     const date=document.getElementById("date");
     const content=document.getElementById("content");
-
+    /*getting last entry from server*/
     const res=await get_data("/GetLastEntry");
     try{
         console.log("data from server 2"+res);
