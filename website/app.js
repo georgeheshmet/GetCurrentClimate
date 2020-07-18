@@ -2,7 +2,7 @@
 
 // Create a new date instance dynamically with JS
 const fixed_weath_url="http://api.openweathermap.org/data/2.5/weather?zip=";
-const weather_api_key="673a6f7a6ce5d02910ca7b64bf4de87e"
+const weather_api_key="673a6f7a6ce5d02910ca7b64bf4de87e&units=imperial"
 let d = new Date();
 
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -47,8 +47,8 @@ function update_weather_info()
     /*debugging for checked conditions*/
     /*if zip code format and length is ok get weather data, post data to server and update UI*/
     if(Number.isInteger(parseInt((zipcode.value),10)) && (zipcode.value.length==5)){
-        get_data(fixed_weath_url+zipcode.value+"&units=metric"+"&appid="+weather_api_key).then(function(data){
-        post_data("/addWeathData",{Current_temp:data.main.temp+" C", date:newDate, UserFeeling:user_feeling.value}).then(updateUI);
+        get_data(fixed_weath_url+zipcode.value+"&appid="+weather_api_key).then(function(data){
+        post_data("/addWeathData",{Current_temp:data.main.temp+" F", date:newDate, UserFeeling:user_feeling.value}).then(updateUI);
         });
     }
     else{
