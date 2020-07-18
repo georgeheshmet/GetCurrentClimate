@@ -3,10 +3,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var cors= require("cors");
 // Setup empty JS object to act as endpoint for all routes
-projectData = [];
-projectData.push({animel:"lion"});
-
-
+projectData = {};
 
 // Start up an instance of app
 const app = express();
@@ -19,11 +16,14 @@ app.use(cors());
 
 /*Get handler to handle getting last entry to front end*/
 app.get("/GetLastEntry",(req,res)=>{
-    res.send(projectData[projectData.length-1]);
+    res.send(projectData);
 })
 
 app.post("/addWeathData",(req,res)=>{
-    projectData.push(req.body);
+
+    projectData.Current_temp=req.body.Current_temp;
+    projectData.date=req.body.date;
+    projectData.UserFeeling=req.body.UserFeeling;
     //res.send("hello there");
     console.log( projectData);
     res.sendStatus(200)

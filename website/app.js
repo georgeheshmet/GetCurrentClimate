@@ -47,8 +47,8 @@ function update_weather_info()
     /*debugging for checked conditions*/
     /*if zip code format and length is ok get weather data, post data to server and update UI*/
     if(Number.isInteger(parseInt((zipcode.value),10)) && (zipcode.value.length==5)){
-        get_data(fixed_weath_url+zipcode.value+"&appid="+weather_api_key).then(function(data){
-        post_data("/addWeathData",{Current_temp:data.main.temp, date:newDate, UserFeeling:user_feeling.value}).then(updateUI);
+        get_data(fixed_weath_url+zipcode.value+"&units=metric"+"&appid="+weather_api_key).then(function(data){
+        post_data("/addWeathData",{Current_temp:data.main.temp+" C", date:newDate, UserFeeling:user_feeling.value}).then(updateUI);
         });
     }
     else{
